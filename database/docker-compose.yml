@@ -1,0 +1,28 @@
+name: playground
+services:
+  database:
+    image: postgis/postgis:16-master
+    ports:
+      - "5432:5432"
+    networks:
+      - ws_net
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: "directus"
+      POSTGRES_PASSWORD: "Websparks123!"
+      POSTGRES_DB: "directusdb"
+      PGUSER: "postgres"
+      PGPORT: 5432
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "directus", "-d", "directusdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_interval: 5s
+      start_period: 30s
+    restart: unless-stopped
+
+networks:
+  ws_net:
+    driver: bridge

@@ -1,0 +1,8 @@
+backend/extensions/node_modules
+backend/extensions/dist
+backend/node_modules
+backend/uploads
+backend/.env
+
+database/db
+database/.backupfile
